@@ -3,6 +3,9 @@ mod crawl;
 mod error;
 mod robots;
 
+use clap::Parser;
+
 fn main() {
-    println!("Hello, world!");
+    let args = args::Args::parse();
+    println!("{args:?}");
 }
