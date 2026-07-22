@@ -30,12 +30,12 @@ impl Robots {
     }
 }
 
-pub fn fetch(start_url: &Url) -> Robots {
+pub fn fetch(client: &reqwest::blocking::Client, start_url: &Url) -> Robots {
     let Ok(robots_url) = start_url.join("/robots.txt") else {
         return Robots::default();
     };
 
-    match reqwest::blocking::get(robots_url) {
+    match client.get(robots_url).send() {
         Ok(response) if response.status().is_success() => {
             Robots::parse(&response.text().unwrap_or_default())
         }
