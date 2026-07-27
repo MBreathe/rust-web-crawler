@@ -27,5 +27,8 @@ fn main() {
         Duration::from_millis(args.delay_ms),
     );
 
-    println!("{site_map:#?}");
+    for (page, links) in site_map {
+        let links = links.iter().map(Url::as_str).collect::<Vec<_>>().join(", ");
+        println!("{page} -> [{links}]");
+    }
 }

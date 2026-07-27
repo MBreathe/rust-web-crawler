@@ -1,5 +1,5 @@
 use std::{
-    collections::{HashMap, HashSet, VecDeque},
+    collections::{HashSet, VecDeque},
     thread,
     time::Duration,
 };
@@ -68,10 +68,10 @@ pub fn crawl(
     max_depth: u32,
     max_pages: usize,
     delay: Duration,
-) -> HashMap<Url, Vec<Url>> {
+) -> Vec<(Url, Vec<Url>)> {
     let mut frontier: VecDeque<(Url, u32)> = VecDeque::new();
     let mut visited: HashSet<Url> = HashSet::new();
-    let mut site_map: HashMap<Url, Vec<Url>> = HashMap::new();
+    let mut site_map: Vec<(Url, Vec<Url>)> = Vec::new();
 
     visited.insert(start_url.clone());
     frontier.push_back((start_url.clone(), 0));
@@ -109,7 +109,7 @@ pub fn crawl(
             }
         }
 
-        site_map.insert(page.url, same_domain_links);
+        site_map.push((page.url, same_domain_links));
     }
 
     site_map
