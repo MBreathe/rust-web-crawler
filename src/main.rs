@@ -1,14 +1,11 @@
-mod args;
-mod crawl;
-mod error;
-mod robots;
-
 use clap::Parser;
 use std::time::Duration;
 use url::Url;
 
+use rust_web_crawler::{args::Args, crawl, robots};
+
 fn main() {
-    let args = args::Args::parse();
+    let args = Args::parse();
 
     let start_url = Url::parse(&args.start_url).expect("invalid start URL");
     let client = reqwest::blocking::Client::builder()

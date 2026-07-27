@@ -9,7 +9,7 @@ enough to reason about but real enough to run against actual sites. See
 
 ## Roadmap
 
-**M1 — Single-threaded crawler** (in progress)
+**M1 — Single-threaded crawler** (done)
 Breadth-first crawl of a single domain: fetch a page, extract its links,
 filter to same-domain, recurse into unvisited ones. Covers: `reqwest`
 (blocking HTTP), `scraper` (HTML parsing), `url` (parsing/normalizing links),
@@ -45,11 +45,12 @@ every crawl so it always terminates.
 ## Usage
 
 ```
-cargo run -- <start-url> [--max-depth N] [--max-pages N] [--delay-ms N] [--threads N]
+cargo run -- <start-url> [--max-depth N] [--max-pages N] [--delay-ms N]
 ```
 
-(CLI shape will firm up as M1 lands.)
+Prints one line per crawled page: `page -> [link1, link2, ...]`, in crawl order.
 
 ## Status
 
-M1 in progress. Nothing runnable yet.
+M1 is done: a single-threaded, same-domain, robots.txt-respecting crawler with an integration test
+covering cycle dedup and domain-scope filtering. M2 (worker pool) hasn't been started.
