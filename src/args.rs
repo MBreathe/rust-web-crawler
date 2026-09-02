@@ -17,4 +17,8 @@ pub struct Args {
     /// Delay in milliseconds between requests
     #[arg(long, default_value_t = 200)]
     pub delay_ms: u64,
+
+    /// Number of worker threads to use for crawling
+    #[arg(long, default_value_t = 4)]
+    pub threads: usize,
 }
